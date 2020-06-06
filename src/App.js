@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
-import TodoItems from './components/TodoItems';
+import TodoItems from './components/ListItems';
 import  GlobalStyle  from './styled/Global'
+import { TodosProvider } from './Contexts/todosContext';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -16,9 +17,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <StyledDiv >
-        <TodoItems />
-      </StyledDiv>
+      <TodosProvider>
+        <StyledDiv >
+          <TodoItems />
+        </StyledDiv>
+      </TodosProvider>
     </>
   );
 }

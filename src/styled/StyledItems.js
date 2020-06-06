@@ -17,4 +17,14 @@ export const StyledDiv = styled.div`
         list-style: none;
     }
 
+    .strike {
+        text-decoration: line-through;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+
+    }
+
 `
