@@ -1,16 +1,22 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {db} from '../Firebase'
 import { StyledDiv } from '../styled/StyledItems'
-import {useTodos} from '../Contexts/todosContext';
+
 import ListItem from './ListItem';
+import Authentication from './Authentication';
+import { auth } from '../Firebase';
 
 export default function TodoItems() {
-    const [todos, setTodos] = useTodos();
+    const [todos, setTodos] = useState({
+        todoItems:[]
+    
+    });
     const [input, setInput] = useState('');
     const [showInput, setShowInput] = useState(false)
+    const [user, setUser] = useState(null)
    
    
-    
+   
 
   
     //connect to db and create/add to todos
@@ -20,13 +26,20 @@ export default function TodoItems() {
             const getData = async () => {
             try {
                
-                let unsubscribe = db.collection('todos').onSnapshot( snapShot => {
+            let unsubscribeFromFirestore = db.collection('todos').onSnapshot( snapShot => {
                     const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } })
-                    setTodos(texts);
+                    setTodos({todoItems:texts});
+                })
+            let unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+                    
+                    setUser({user})
+                    
+                    
                 })
 
                 return () => {
-                    unsubscribe();
+                    unsubscribeFromFirestore();
+                    unsubscribeFromAuth();
                 }
 
             }
@@ -66,10 +79,11 @@ export default function TodoItems() {
     }
 
 
-   
+    console.log(user);
    
     return (
         <StyledDiv>
+            <Authentication user={user} />
             <button className="addTodo" onClick={()=> setShowInput(true)} >Add todo</button>
            
            
@@ -79,19 +93,19 @@ export default function TodoItems() {
             <input type="text"
             name="todoItem"
              value={input} 
-             placeholder="type todo"
+             placeholder="type here..."
              onChange={(e)=> setInput(e.target.value) } />
              <button onClick={handleAdd} disabled = {input.length === 0}>Add</button>
              <button onClick={() => setShowInput(false)}>Cancel</button></>}
              <h2>Todo List</h2>
-            {todos.length < 1 && <p>No items to display</p>}
-            {todos.map(item => (
+            {todos.todoItems.length < 1 && <p>No items to display</p>}
+            {todos.todoItems.map(item => (
                 <ListItem key={item.id} item={item} />
             ))}
             
           
 
-           
+          
             
         </StyledDiv>
     )

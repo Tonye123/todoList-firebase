@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import TodoItems from './components/ListItems';
 import  GlobalStyle  from './styled/Global'
 import { TodosProvider } from './Contexts/todosContext';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 
 const StyledDiv = styled.div`
   display: flex;
