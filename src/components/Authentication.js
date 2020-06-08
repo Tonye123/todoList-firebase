@@ -3,9 +3,7 @@ import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
 
 export default function Authentication({user,loading}) {
-   if(loading) return null;
-
-    
+   if(loading) return null; 
     
     return (
         <div>

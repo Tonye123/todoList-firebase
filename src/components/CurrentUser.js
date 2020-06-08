@@ -1,10 +1,10 @@
 import React from 'react';
-import { auth } from '../Firebase'
+import { useAuth } from '../Contexts/AuthContext'
 
 export default function CurrentUser({displayName,photoURL,email,children}) {
-
+    const auth = useAuth();
   
-    
+    const { SignOut } = auth;
     return (
         <section>
             <div>
@@ -17,7 +17,7 @@ export default function CurrentUser({displayName,photoURL,email,children}) {
             </div>
             <div>
                 <div>{children}</div>
-                <button onClick={() => auth.signOut()}>Sign Out</button>
+                <button onClick={SignOut}>Sign Out</button>
             </div>
             
         </section>

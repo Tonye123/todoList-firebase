@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import ListItems from './components/ListItems';
 import  GlobalStyle  from './styled/Global'
-import {db,auth} from './Firebase'
+import {db} from './Firebase'
 import Authentication from './components/Authentication';
+import {useAuth} from './Contexts/AuthContext'
+
 
 const StyledDiv = styled.div`
   display: flex;
@@ -16,26 +18,11 @@ const StyledDiv = styled.div`
 function App() {
   const[todos,setTodos] = useState({
     todoItems:[],
-    user: null,
   });
+  const auth = useAuth();
 
-  const handleAdd = async (todo) => {
-        
-        try {
-           await db.collection('todos').add({
-                text: todo
-            })
+  
 
-           
-            
-        } catch (error) {
-            //create set error
-            console.error("Error adding item", error);
-            
-            
-        }
-     
-    }
 
     //connect to db and create/add to todos
     useEffect(() => {
@@ -46,20 +33,16 @@ function App() {
                
             let unsubscribeFromFirestore =  db.collection('todos').onSnapshot( snapShot => {
                     const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } })
-                    setTodos({todoItems:texts,...todos});
-                    
-                })
-             let unsubscribeFromAuth =  auth.onAuthStateChanged(userAuth => {
-                    
-                    setTodos({...todos,user:userAuth})
+                    setTodos({todoItems:texts});
                    
                     
                     
                 })
+       
 
                 return () => {
                     unsubscribeFromFirestore();
-                    unsubscribeFromAuth();
+                
                 }
 
             }
@@ -81,10 +64,10 @@ function App() {
     }
 
     
-    console.log(todos)
+   
 
-    const {todoItems, user} = todos
-  
+    const {todoItems} = todos;
+    const {user} = auth;
   return (
     <>
       <GlobalStyle />
@@ -92,7 +75,7 @@ function App() {
         <StyledDiv >
           <h1>To-Do List</h1>
           <Authentication user={user} />
-          <ListItems todos={todoItems} onAdd={handleAdd} />
+          <ListItems todos={todoItems} />
         </StyledDiv>
      
     </>
