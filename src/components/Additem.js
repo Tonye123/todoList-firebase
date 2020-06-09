@@ -1,16 +1,41 @@
 import React, { useState } from 'react'
-import { db } from '../Firebase'
+import { db,auth } from '../Firebase'
 
-export default function Additem({onAdd}) {
-    const[input, setInput] = useState('');
+export default function Additem() {
+    const[input, setInput] = useState({
+        text:'',
+    });
     const[showInput, setShowInput] = useState(false)
+       
+        
+      const handleChange = (event) => {
+          const inputValue = event.target.value;
+          console.log(inputValue);
+           
+          
+          setInput({ text: inputValue })
+          console.log('input',input.text);
 
+      }  
+      
+      
+      const{uid,displayName,email} = auth.currentUser || {}
       const handleAdd = async () => {
         
         try {
            await db.collection('todos').add({
-                text: input
+                todo: {
+                    itemText: input.text,
+                    user: {
+                        uid,
+                        displayName,
+                        email
+
+                    }
+                }
             })
+
+            setInput({text:''})
 
            
             
@@ -20,21 +45,34 @@ export default function Additem({onAdd}) {
             
             
         }
-        setInput('')
+        
      
     }
-
+    
     return (
+        
         <div>
+         
             <button className="addTodo" onClick={()=> setShowInput(true)} >Add todo</button>
-            <label id="todoItem">Add an Item</label>
+            
+            { showInput &&  <>  <label id="todoItem">Add an Item</label>
             <input type="text"
-            name="todoItem"
-             value={input} 
+             name="todoItem"
+             value={input.text} 
              placeholder="type here..."
-             onChange={(e)=> setInput(e.target.value) } />
-             <button onClick={handleAdd} disabled = {input.length === 0}>Add</button>
-             <button onClick={() => setShowInput(false)}>Cancel</button>
+             onChange={handleChange } />
+             <button onClick={handleAdd} disabled = {input.text === 0}>Add</button>
+             <button onClick={() => setShowInput(false)}>Cancel</button>  </>
+               
+          }
+         
+
+          
+    
+
+             
         </div>
+      
     )
 }
+      

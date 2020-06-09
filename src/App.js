@@ -9,7 +9,8 @@ import {useAuth} from './Contexts/AuthContext'
 
 const StyledDiv = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background: #f9f9f9;
   min-height: 100vh;
 
@@ -32,7 +33,9 @@ function App() {
             try {
                
             let unsubscribeFromFirestore =  db.collection('todos').onSnapshot( snapShot => {
+              
                     const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } })
+                    console.log(texts)
                     setTodos({todoItems:texts});
                    
                     

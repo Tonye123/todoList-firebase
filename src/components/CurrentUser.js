@@ -1,15 +1,16 @@
 import React from 'react';
 import { useAuth } from '../Contexts/AuthContext'
+import { StyledUser } from '../styled/StyledUser';
 
 export default function CurrentUser({displayName,photoURL,email,children}) {
     const auth = useAuth();
   
     const { SignOut } = auth;
     return (
-        <section>
-            <div>
+        <StyledUser>
+            <div className="userDetails">
                 {photoURL && <img src={photoURL} alt={displayName} />}
-                <div>
+                <div >
                     <h2>{displayName}</h2>
                     <p>{email}</p>
                     <p>Created at</p>
@@ -20,7 +21,7 @@ export default function CurrentUser({displayName,photoURL,email,children}) {
                 <button onClick={SignOut}>Sign Out</button>
             </div>
             
-        </section>
+        </StyledUser>
     )
 }
 
