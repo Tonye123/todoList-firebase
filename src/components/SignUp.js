@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { StyledForm } from '../styled/StyledForm';
-import { auth } from '../Firebase';
+import { auth, createUserProfileDocumnet } from '../Firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,17 +38,12 @@ export default function SignUp() {
         const { email,password } = input
         try {
             const  { user }  = await auth.createUserWithEmailAndPassword(email,password);
-            console.log(displayName);
-            
-            user.updateProfile({ displayName })
+            createUserProfileDocumnet(user, { displayName })
         }catch(error) {
             console.error(error);
             
         }
         
-
-
-
         setInput({
             displayName: '',
             email: '',

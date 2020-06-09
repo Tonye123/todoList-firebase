@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './Contexts/AuthContext';
+import { BrowserRouter as Router} from 'react-router-dom'
+import { TodosProvider } from './Contexts/TodosContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <Router>
+      <TodosProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </TodosProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

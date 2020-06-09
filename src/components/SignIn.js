@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { StyledForm } from '../styled/StyledForm';
 import { signInWithGoogle } from '../Firebase';
+import { useAuth } from '../Contexts/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,6 +20,7 @@ export default function SignIn() {
         password: ''
 
     });
+    const auth = useAuth()
     const classes = useStyles();
 
     const handleChange = (event) => {
@@ -33,7 +35,9 @@ export default function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-       
+        auth.SignIn(input.email,input.password)
+        .catch(err => console.error("error signing in", err.message))
+        
         setInput({
             email: '',
             password: ''

@@ -20,3 +20,47 @@ export const auth = firebase.auth();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => firebase.auth().signInWithPopup(provider)
+
+
+//creating user documnent profile
+//takes in user object we got from the auth module and some additional data
+export const createUserProfileDocumnet = async(user,additionalData) => {
+    if(!user) return;
+
+    //get a reference to the place in the database where a user profile might be.
+    const userRef = db.doc(`users/${user.uid}`);
+
+    //go and fetch the document from that location
+    const snapshot = await userRef.get();
+
+    //if the document does not exist, then we go ahead to create one
+    if(!snapshot.exists) {
+        const { displayName, email, photoURL } = user;
+        const createdAt = new Date();
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                photoURL,
+                createdAt,
+                ...additionalData
+            })
+        } catch (error) {
+            console.error("Error creating user",error);
+            
+        }
+    }
+        return getUserDocument(user.uid)
+   };
+
+    export const getUserDocument = async(uid) => {
+        if(!uid) return null;
+        try {
+            const userDocument = await db.collection('users').doc(uid).get()
+            return {uid, ...userDocument.data()}
+        } catch (error) {
+            console.error('Error fetching user', error.message);
+            
+            
+        }
+    }
