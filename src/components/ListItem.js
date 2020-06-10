@@ -34,7 +34,7 @@ export default function ListItem({item}) {
      }
 
      const handleUpdate = async (id) => {
-         let docRef = await db.collection("todos").doc(id);
+         let docRef = db.collection("todos").doc(id);
          docRef.update({
              
              todo: {...todo,itemText:textUpdate}

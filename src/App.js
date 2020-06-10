@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import ListItems from './components/ListItems';
 import  GlobalStyle  from './styled/Global'
 import Authentication from './components/Authentication';
-import {useAuth} from './Contexts/AuthContext';
 import { Switch, Route, Link} from 'react-router-dom';
 import { useTodos } from './Contexts/TodosContext';
+import UserProfile from './components/UserProfile'
 
 
 
@@ -21,7 +21,7 @@ const StyledDiv = styled.div`
 
 function App() {
  
-  const auth = useAuth();
+  
   const [todos] = useTodos();
 
   
@@ -39,11 +39,11 @@ function App() {
       <GlobalStyle />
     
         <StyledDiv >
-          <h1>To-Do List</h1>
+        <Link to="/">  <h1>To-Do List</h1> </Link>
           <Authentication />
           <Switch>
-          <ListItems />
-
+            <Route exact path="/" component={ListItems} />
+            <Route exact path="/userprofile" component={UserProfile} />
           </Switch>
         </StyledDiv>
      

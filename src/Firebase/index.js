@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import 'firebase/auth'
+import 'firebase/auth';
+import 'firebase/storage'
 
 
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const firebaseConfig = {
 
 export const db = firebase.firestore();
 export const auth = firebase.auth();
+export const storage = firebase.storage();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => firebase.auth().signInWithPopup(provider)
@@ -56,8 +58,8 @@ export const createUserProfileDocumnet = async(user,additionalData) => {
     export const getUserDocument = async(uid) => {
         if(!uid) return null;
         try {
-            const userDocument = await db.collection('users').doc(uid).get()
-            return {uid, ...userDocument.data()}
+           return  db.collection('users').doc(uid);
+            
         } catch (error) {
             console.error('Error fetching user', error.message);
             

@@ -21,7 +21,7 @@ import { auth, createUserProfileDocumnet } from '../Firebase'
 const useProvideAuth = () => {
     const [user, setUser] = useState(null);
 
-    const SignOut = () => {
+    const SignOut = async () => {
         return auth.signOut().then(()=> setUser(false));
     }
 
@@ -35,11 +35,20 @@ const useProvideAuth = () => {
 
     useEffect(()=>{
         const unsubscribe = auth.onAuthStateChanged( async userAuth => {
-            const user = await createUserProfileDocumnet(userAuth);
-            console.log(user)
-            if(user) {
-                setUser(user)
-            } else {
+            if(userAuth) {
+                const userRef = await createUserProfileDocumnet(userAuth);
+                
+                
+                userRef.onSnapshot(snapshot => {
+                    console.log(snapshot);
+                    
+                    setUser({uid:snapshot.id, ...snapshot.data()})
+                   
+                })
+            }
+            
+           
+           else {
                 setUser(false)
             }
         })
