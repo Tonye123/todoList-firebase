@@ -19,7 +19,7 @@ export default function Additem() {
       }  
       
       
-      const{uid,displayName,email} = auth.currentUser || {}
+      const{uid,displayName,email,photoURL} = auth.currentUser || {}
       const handleAdd = async () => {
         
         try {
@@ -29,7 +29,8 @@ export default function Additem() {
                     user: {
                         uid,
                         displayName,
-                        email
+                        email,
+                        photoURL
 
                     }
                 }
