@@ -4,6 +4,7 @@ import { db,auth } from '../Firebase'
 export default function Additem() {
     const[input, setInput] = useState({
         text:'',
+   
     });
     const[showInput, setShowInput] = useState(false)
        
@@ -21,11 +22,13 @@ export default function Additem() {
       
       const{uid,displayName,email,photoURL} = auth.currentUser || {}
       const handleAdd = async () => {
-        
+          
+           
         try {
            await db.collection('todos').add({
                 todo: {
                     itemText: input.text,
+                    authorId: uid,
                     user: {
                         uid,
                         displayName,

@@ -1,8 +1,7 @@
 import React from 'react'
-import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
-import SignInSignUp from './SignInSignUp';
 import { useAuth } from '../Contexts/AuthContext';
+import ListItems from '../components/ListItems';
 
 
 export default function Authentication() {
@@ -10,7 +9,9 @@ export default function Authentication() {
     const {user} = auth
     return (
         <div>
-            {user ? <CurrentUser {...user} /> : <SignInSignUp />}
+            {/* {user ? <ListItems /> : <SignIn />} */}
+
+            <h2>Me auth</h2>
         </div>
     )
 }

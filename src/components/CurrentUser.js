@@ -1,24 +1,31 @@
 import React from 'react';
 import { useAuth } from '../Contexts/AuthContext'
 import { StyledUser } from '../styled/StyledUser';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-export default function CurrentUser({displayName,photoURL,email,children}) {
+export default function CurrentUser({displayName,photoURL,email}) {
     const auth = useAuth();
+   
+    
+    
+
   
-    const { SignOut } = auth;
+    const { SignOut,user } = auth;
+    
+    
+    
     return (
         <StyledUser>
             <div className="userDetails">
-                {photoURL && <img src={photoURL} alt={displayName} />}
+                {user.photoURL && <img src={user.photoURL} alt={user.displayName} />}
                 <div >
-                   <Link to="/userprofile"> <h2>{displayName}</h2></Link>
-                    <p>{email}</p>
+                   <Link to="/userprofile"> <h2>{user.displayName}</h2></Link>
+                    <p>{user.email}</p>
                     <p>Created at</p>
                 </div>
             </div>
             <div>
-                <div>{children}</div>
+                <div></div>
                 <button onClick={SignOut}>Sign Out</button>
             </div>
             

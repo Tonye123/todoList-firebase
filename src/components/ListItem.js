@@ -2,13 +2,20 @@ import React, {useState} from 'react';
 import {db} from '../Firebase';
 import Checkbox from '@material-ui/core/Checkbox';
 import { StyledList } from '../styled/StyledList';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Edit from '@material-ui/icons/Edit';
+
+
+
 
 
 
 export default function ListItem({item}) {
     const [isEditState, setEditState] = useState(false);
     const [isChecked, setChecked] = useState(false)
-    const [textUpdate, setTextUpdate ] = useState(item.todo.itemText)
+    const [textUpdate, setTextUpdate ] = useState(item.todo.itemText);
+
+    
 
 
     const{id,todo} = item;
@@ -57,8 +64,8 @@ export default function ListItem({item}) {
                 /><span className={isChecked ? 'strike' : undefined}>{todo.itemText} </span>
                 </div>
                 <div>
-                  <button className="edit" onClick={() => { handleEdit(id) }}> Edit </button>
-                 <button className="delete" onClick={() => { handleDelete(id) }}> Delete </button>
+                  <Edit className="edit" onClick={() => { handleEdit(id) }}> Edit </Edit>
+                 <DeleteForeverIcon className="delete" onClick={() => { handleDelete(id) }}> Delete </DeleteForeverIcon>
                  </div>
                  
                 

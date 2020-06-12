@@ -25,8 +25,8 @@ const useProvideAuth = () => {
         return auth.signOut().then(()=> setUser(false));
     }
 
-    const SignIn = (email, password) => {
-        return auth.signInWithEmailAndPassword(email,password)
+    const SignIn = async (email, password) => {
+        return  await auth.signInWithEmailAndPassword(email,password)
         .then(response => {
             setUser(response.user);
             return response.user;

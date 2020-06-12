@@ -5,16 +5,12 @@ import { db } from '../Firebase'
 const todosContext = createContext()
 const useTodos = () => useContext(todosContext)
 
-
-
-
 const TodosProvider = ({children}) => {
     const [todos,setTodos] = useState({
         todoItems:[],
     })
 
     useEffect(() => {
-     
         
             const getData = async () => {
             try {
@@ -22,10 +18,8 @@ const TodosProvider = ({children}) => {
             let unsubscribeFromFirestore =  db.collection('todos').onSnapshot( snapShot => {
               
                     const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } })
-                    
                     setTodos({todoItems:texts});  
-                    
-                    
+                                   
                 })
        
                 return () => {

@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { auth,db,storage } from '../Firebase';
 import { StyledForm } from '../styled/StyledForm';
+import CurrentUser from './CurrentUser';
 
 export default function UserProfile() {
     const [displayName, setDisplay] = useState('');
@@ -21,7 +22,7 @@ export default function UserProfile() {
 
     const uploadImage = (e) => {
          imageInput = e.target.files[0];
-         console.log(imageInput)
+         
         
     }
 
@@ -50,6 +51,7 @@ export default function UserProfile() {
     }
     return (
         <section>
+            <CurrentUser />
            <StyledForm onSubmit={handleSubmit}>
                <input type="text"
                value={displayName}

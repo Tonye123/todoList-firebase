@@ -5,6 +5,7 @@ import { StyledForm } from '../styled/StyledForm';
 import { signInWithGoogle } from '../Firebase';
 import { useAuth } from '../Contexts/AuthContext';
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
@@ -74,6 +75,7 @@ export default function SignIn() {
 
             <input type="submit" value="Sign In" />
             <button onClick={signInWithGoogle}>Sign In With Google</button>
+           
 
 
 
