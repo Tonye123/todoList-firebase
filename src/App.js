@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import  GlobalStyle  from './styled/Global';
-import { Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import UserProfile from './components/UserProfile';
 import { useAuth } from './Contexts/AuthContext';
 import SignIn from './components/SignIn';
@@ -19,7 +19,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f9f9f9;
+  background: blanchedalmond;
   min-height: 100vh;
 
 `
@@ -28,9 +28,9 @@ function App() {
  
    
     //create util folder for this function
-    function collectId(doc) {
-        return { id: doc.id, ...doc.data()}
-    }
+    // function collectId(doc) {
+    //     return { id: doc.id, ...doc.data()}
+    // }
 
 
 

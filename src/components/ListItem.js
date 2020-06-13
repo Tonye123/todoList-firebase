@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {db} from '../Firebase';
+import {db,auth} from '../Firebase';
 import Checkbox from '@material-ui/core/Checkbox';
 import { StyledList } from '../styled/StyledList';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { green } from '@material-ui/core/colors';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import Edit from '@material-ui/icons/Edit';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
@@ -19,8 +18,8 @@ export default function ListItem({item}) {
     const [textUpdate, setTextUpdate ] = useState(item.todo.itemText);
 
     
-
-
+    
+    const { uid } = auth.currentUser; 
     const{id,todo} = item;
 
     const handleChange = (event) => {
@@ -29,8 +28,9 @@ export default function ListItem({item}) {
 
     };
     const handleDelete = async (id) => {
+        
         try {
-            await db.collection("todos").doc(id).delete()
+            await db.collection("newUserData").doc(uid).collection("lists").doc(id).delete()
 
         } catch (error) {
             console.error("Error deleting", error);
@@ -44,7 +44,8 @@ export default function ListItem({item}) {
      }
 
      const handleUpdate = async (id) => {
-         let docRef = db.collection("todos").doc(id);
+        
+         let docRef = db.collection("newUserData").doc(uid).collection("lists").doc(id);
          docRef.update({
              
              todo: {...todo,itemText:textUpdate}

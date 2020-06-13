@@ -53,7 +53,7 @@ export const createUserProfileDocumnet = async(user,additionalData) => {
             console.error("Error creating user",error);
             
         }
-    }
+    }   //return newly created document or an already existing one
         return getUserDocument(user.uid)
    };
 

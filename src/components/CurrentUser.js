@@ -24,11 +24,10 @@ export default function CurrentUser({displayName,photoURL,email}) {
                 <div >
                    <Link to="/userprofile"> <h2>{user.displayName}</h2></Link>
                     <p>{user.email}</p>
-                    <p>Created at</p>
+                   
                 </div>
             </div>
             <div>
-                <div></div>
                 <button onClick={SignOut}>Sign Out</button>
             </div>
             

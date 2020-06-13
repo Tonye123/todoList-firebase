@@ -26,10 +26,10 @@ export default function Additem() {
           
            
         try {
-           await db.collection('todos').add({
+           await db.collection('newUserData').doc(uid).collection('lists').add({
                 todo: {
                     itemText: input.text,
-                    authorId: uid,
+                    
                     user: {
                         uid,
                         displayName,

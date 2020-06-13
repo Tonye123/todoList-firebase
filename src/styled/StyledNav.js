@@ -7,6 +7,7 @@ export const StyledNav = styled.nav`
         justify-content: space-between;
         padding: 0em 3em;
         align-items: center;
+        flex-wrap: wrap;
 
         ul {
             display: flex;

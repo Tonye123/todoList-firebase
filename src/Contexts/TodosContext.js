@@ -1,10 +1,13 @@
-import React,{createContext, useContext,useState,useEffect} from 'react'
-import { db } from '../Firebase'
+import React,{createContext, useContext,useState,useEffect} from 'react';
+import { db, auth } from '../Firebase';
+
+
 
 
 
 const todosContext = createContext()
-const useTodos = () => useContext(todosContext)
+const useTodos = () => useContext(todosContext);
+
 
 
 
@@ -13,22 +16,33 @@ const TodosProvider = ({children}) => {
         todoItems:[],
     })
 
+    const [userId, setUid] = useState(null)
+   
+    
     useEffect(() => {
+            
         
             const getData = async () => {
-            try {
                
-                let unsubscribeFromFirestore = db.collection('todos').onSnapshot( snapShot => {
-              
-                    const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } })
-                    console.log(texts);
+                
+            try {
+                let unsubscribeFromAuth = await auth.onAuthStateChanged(() => {
+                    let ID = auth.currentUser.uid
+                    setUid(ID)
+                })
+                
+                let unsubscribeFromFirestore = await db.collection('newUserData').doc(userId)
+                .collection('lists').onSnapshot(snapShot => {
                     
+                    const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } });
                     setTodos({todoItems:texts});  
                                    
                 })
        
                 return () => {
                     unsubscribeFromFirestore();
+                    unsubscribeFromAuth();
+                   
                 
                 }
 
@@ -45,7 +59,7 @@ const TodosProvider = ({children}) => {
 
        
        
-    }, [])
+    }, [userId])
 
     return (
         <todosContext.Provider value={[todos,setTodos]}>

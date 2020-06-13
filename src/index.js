@@ -12,11 +12,13 @@ import { TodosProvider } from './Contexts/TodosContext';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <TodosProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <TodosProvider>
+        
           <App />
-        </AuthProvider>
-      </TodosProvider>
+        
+        </TodosProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

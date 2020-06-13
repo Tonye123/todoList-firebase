@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledDiv = styled.div`
     margin-top: 10%;
-    background: #209cee;
+    background: lightcoral;
     padding: 30px;
 
    

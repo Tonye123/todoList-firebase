@@ -49,8 +49,6 @@ const useProvideAuth = () => {
                 
                 
                 userRef.onSnapshot(snapshot => {
-                    console.log(snapshot);
-                    
                     setUser({uid:snapshot.id, ...snapshot.data()})
                    
                 })

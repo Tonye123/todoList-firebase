@@ -63,7 +63,7 @@ export default function UserProfile() {
                 <label htmlFor="avatar">Choose a profile picture:</label>
                 <input type="file" id="avatar" onChange={uploadImage} placeholder="upload an image" />
                 </div>
-                <input type="submit" />
+                <input className="upload" type="submit" />
            </StyledForm>
         </section>
     )

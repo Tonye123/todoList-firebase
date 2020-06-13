@@ -13,10 +13,4 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
 
-exports.getAllTodos = functions.https.onRequest(async (request,response) => {
-    const snapshot = await firestore.collection('todos').get();
-    const todos = snapshot.docs.map(doc => ({id:doc.id, ...doc.data()}));
 
-    response.json({ todos })
-
-});

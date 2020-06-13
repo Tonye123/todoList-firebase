@@ -46,7 +46,7 @@ export default function Header() {
             <Link to="/">My List</Link>
             <ul>
                  { user && 
-                   <Link> Sign out</Link>
+                   <Link to="/signin"> Sign out</Link>
                 
                && <><li className="welcome"> Welcome {user.displayName}</li>
             {user.photoURL ? <img src={user.photoURL} alt={user.displayName} />
