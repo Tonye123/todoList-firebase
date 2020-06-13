@@ -57,9 +57,12 @@ export default function UserProfile() {
                value={displayName}
                name = "displayName"
                onChange={handleChange}
-               placeholder="Display Name"
+               placeholder="Change Display Name..."
                 />
-                <input type="file" onChange={uploadImage} />
+                <div>
+                <label htmlFor="avatar">Choose a profile picture:</label>
+                <input type="file" id="avatar" onChange={uploadImage} placeholder="upload an image" />
+                </div>
                 <input type="submit" />
            </StyledForm>
         </section>

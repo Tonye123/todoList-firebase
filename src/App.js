@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from 'styled-components'
-import ListItems from './components/ListItems';
-import  GlobalStyle  from './styled/Global'
-import Authentication from './components/Authentication';
-import { Switch, Route} from 'react-router-dom';
+import styled from 'styled-components';
+import  GlobalStyle  from './styled/Global';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import UserProfile from './components/UserProfile';
 import { useAuth } from './Contexts/AuthContext';
 import SignIn from './components/SignIn';
 import Header from './components/Header';
+import HomePage from './components/HomePage';
+import SignUp from './components/SignUp';
 
 
 
@@ -42,10 +42,12 @@ function App() {
           
          
           <Switch>
-            
+             
              <Route path = "/signin" component={SignIn} /> 
+            <Route exact path="/signup" component={SignUp} /> 
              <PrivateRoute path="/userprofile" component={UserProfile} />
-            <PrivateRoute  path="/" component={ListItems} />
+            <PrivateRoute exact path="/" component={HomePage} />
+            
            
             
 
@@ -62,6 +64,8 @@ const PrivateRoute = ({ component, ...options }) => {
   const auth = useAuth();
   const {user} = auth;
   const finalComponent = user ? component : SignIn;
+    
+  
 
   return <Route {...options} component={finalComponent} />;
 };

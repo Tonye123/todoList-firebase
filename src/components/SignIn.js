@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { StyledForm } from '../styled/StyledForm';
 import { signInWithGoogle } from '../Firebase';
 import { useAuth } from '../Contexts/AuthContext';
+import { Link,useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,8 @@ export default function SignIn() {
         password: ''
 
     });
-    const auth = useAuth()
+    const auth = useAuth();
+    const history = useHistory();
     const classes = useStyles();
 
     const handleChange = (event) => {
@@ -38,6 +40,8 @@ export default function SignIn() {
         e.preventDefault();
         auth.SignIn(input.email,input.password)
         .catch(err => console.error("error signing in", err.message))
+
+        history.push("/");
         
         setInput({
             email: '',
@@ -74,7 +78,13 @@ export default function SignIn() {
             />
 
             <input type="submit" value="Sign In" />
-            <button onClick={signInWithGoogle}>Sign In With Google</button>
+            <button onClick={()=>{
+                signInWithGoogle()
+                history.push("/")
+                }}>Sign In With Google</button>
+            <div>
+                <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+            </div>
            
 
 

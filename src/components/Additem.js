@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { db,auth } from '../Firebase'
+import React, { useState } from 'react';
+import { db,auth } from '../Firebase';
+import { StyledAddItem } from '../styled/StyledAddItem';
 
 export default function Additem() {
     const[input, setInput] = useState({
@@ -11,11 +12,11 @@ export default function Additem() {
         
       const handleChange = (event) => {
           const inputValue = event.target.value;
-          console.log(inputValue);
+          
            
           
           setInput({ text: inputValue })
-          console.log('input',input.text);
+          
 
       }  
       
@@ -44,7 +45,7 @@ export default function Additem() {
            
             
         } catch (error) {
-            //create set error
+            
             console.error("Error adding item", error);
             
             
@@ -55,7 +56,7 @@ export default function Additem() {
     
     return (
         
-        <div>
+        <StyledAddItem>
          
             <button className="addTodo" onClick={()=> setShowInput(true)} >Add todo</button>
             
@@ -65,7 +66,7 @@ export default function Additem() {
              value={input.text} 
              placeholder="type here..."
              onChange={handleChange } />
-             <button onClick={handleAdd} disabled = {input.text === 0}>Add</button>
+             <button onClick={handleAdd} disabled = {input.text.length < 4}>Add</button>
              <button onClick={() => setShowInput(false)}>Cancel</button>  </>
                
           }
@@ -75,7 +76,7 @@ export default function Additem() {
     
 
              
-        </div>
+        </StyledAddItem>
       
     )
 }

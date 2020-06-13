@@ -3,7 +3,10 @@ import {db} from '../Firebase';
 import Checkbox from '@material-ui/core/Checkbox';
 import { StyledList } from '../styled/StyledList';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { green } from '@material-ui/core/colors';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import Edit from '@material-ui/icons/Edit';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
 
 
@@ -64,7 +67,7 @@ export default function ListItem({item}) {
                 /><span className={isChecked ? 'strike' : undefined}>{todo.itemText} </span>
                 </div>
                 <div>
-                  <Edit className="edit" onClick={() => { handleEdit(id) }}> Edit </Edit>
+                <Edit className="edit" onClick={() => { handleEdit(id) }}> Edit </Edit>
                  <DeleteForeverIcon className="delete" onClick={() => { handleDelete(id) }}> Delete </DeleteForeverIcon>
                  </div>
                  
@@ -72,8 +75,8 @@ export default function ListItem({item}) {
                   </li>
                 ) : (<li>
                         <input type="text" value={textUpdate} onChange={(e)=> setTextUpdate(e.target.value)}/>
-                        <button onClick={() => { handleUpdate(id) }}> Save </button>
-                        <button onClick={() => setEditState(false) }> Cancel </button>
+                        <CheckCircleRoundedIcon onClick={() => { handleUpdate(id) }}> Save </CheckCircleRoundedIcon>
+                        <CancelRoundedIcon onClick={() => setEditState(false) }> Cancel </CancelRoundedIcon>
                         
                     </li>
                 ) }

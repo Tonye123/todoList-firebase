@@ -11,6 +11,7 @@ export const StyledList = styled.div`
   li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
     div {
         align-self: center;

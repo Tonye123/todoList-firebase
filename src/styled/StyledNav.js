@@ -23,5 +23,18 @@ export const StyledNav = styled.nav`
               width: 24px;
               border-radius: 50%;
             }
+
+            div {
+              a {
+                text-decoration:none;
+              }
+              button {
+                background:none;
+                border:none;
+                font-size: 16px;
+                padding: 0px;
+                cursor:pointer;
+              }
+            }
         }
 `;

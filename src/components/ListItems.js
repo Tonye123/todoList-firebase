@@ -14,20 +14,23 @@ export default function ListItems() {
     
    
     return (
-        <StyledDiv>
-            
+        <>
             <Additem />
-             <h2>Todo List</h2>
-             <div>
-            {todoItems.length < 1 && <p>No items to display</p>}
-            {todoItems.map(item => (
+            <StyledDiv>
                 
-                <ListItem key={item.id} item={item} />
+               
+                <h2>Todo List</h2>
+                <div>
+                {todoItems.length < 1 && <p>No items to display</p>}
+                {todoItems.map(item => (
+                    
+                    <ListItem key={item.id} item={item} />
+                    
+                    
+                ))}
+                </div>
                 
-                
-            ))}
-            </div>
-            
-        </StyledDiv>
+            </StyledDiv>
+        </>
     )
 }

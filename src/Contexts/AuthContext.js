@@ -1,5 +1,6 @@
 import React, {createContext,useState, useContext, useEffect} from 'react';
-import { auth, createUserProfileDocumnet } from '../Firebase'
+import { auth, createUserProfileDocumnet } from '../Firebase';
+import { useHistory } from 'react-router-dom'
 
 
  const AuthContext = createContext();
@@ -20,9 +21,17 @@ import { auth, createUserProfileDocumnet } from '../Firebase'
 
 const useProvideAuth = () => {
     const [user, setUser] = useState(null);
+    const history = useHistory();
 
     const SignOut = async () => {
-        return auth.signOut().then(()=> setUser(false));
+        return auth.signOut().then(()=> {
+
+        setUser(false)
+        history.push("/signin")
+        
+        })
+
+        
     }
 
     const SignIn = async (email, password) => {

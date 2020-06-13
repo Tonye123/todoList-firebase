@@ -8,6 +8,13 @@ export default createGlobalStyle`
         font-weight: 300;
     }
 
+    input[type=text] {
+            width: auto;
+            padding: 12px 15px;
+            margin: 8px 0;
+            box-sizing: border-box;
+}
+
 
 
 

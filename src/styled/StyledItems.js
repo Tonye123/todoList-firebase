@@ -5,16 +5,14 @@ export const StyledDiv = styled.div`
     background: #209cee;
     padding: 30px;
 
-    .addTodo{
-        display: block;
-        position: relative;
-        right:-80%;
-    }
+   
 
     label {
         display: block;
     }
-
+    h2{
+        color: whitesmoke;
+    }
     li {
         list-style: none;
     }

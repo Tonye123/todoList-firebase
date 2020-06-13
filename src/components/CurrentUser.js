@@ -1,7 +1,9 @@
 import React from 'react';
 import { useAuth } from '../Contexts/AuthContext'
 import { StyledUser } from '../styled/StyledUser';
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import defaultImage from '../images/defaultPhoto.png'
+
 
 export default function CurrentUser({displayName,photoURL,email}) {
     const auth = useAuth();
@@ -17,7 +19,8 @@ export default function CurrentUser({displayName,photoURL,email}) {
     return (
         <StyledUser>
             <div className="userDetails">
-                {user.photoURL && <img src={user.photoURL} alt={user.displayName} />}
+                {user.photoURL ? <img src={user.photoURL} alt={user.displayName} />
+                : <img src={defaultImage} alt="default avatar" />}
                 <div >
                    <Link to="/userprofile"> <h2>{user.displayName}</h2></Link>
                     <p>{user.email}</p>

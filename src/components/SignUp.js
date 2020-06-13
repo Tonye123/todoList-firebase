@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { StyledForm } from '../styled/StyledForm';
 import { auth, createUserProfileDocumnet } from '../Firebase';
+import { Link, useHistory } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +22,7 @@ export default function SignUp() {
         password:''
 
     });
+    const history = useHistory();
     const classes = useStyles();
 
     const handleChange = (event) => {
@@ -38,7 +41,10 @@ export default function SignUp() {
         const { email,password } = input
         try {
             const  { user }  = await auth.createUserWithEmailAndPassword(email,password);
-            createUserProfileDocumnet(user, { displayName })
+            createUserProfileDocumnet(user, { displayName });
+            history.push("/")
+
+
         }catch(error) {
             console.error(error);
             
@@ -84,6 +90,7 @@ export default function SignUp() {
                 />
 
                 <input type="submit" value="Sign Up" />
+                <div>I already have an account <Link to="/signin">Sign In</Link></div>
                
                
               
