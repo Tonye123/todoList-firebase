@@ -42,7 +42,7 @@ export default function SignUp() {
         try {
             const  { user }  = await auth.createUserWithEmailAndPassword(email,password);
             createUserProfileDocumnet(user, { displayName });
-            history.push("/")
+            history.push("/authentication");
 
 
         }catch(error) {

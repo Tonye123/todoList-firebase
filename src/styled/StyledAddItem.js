@@ -17,6 +17,14 @@ export const StyledAddItem = styled.div`
             padding: 10px;
         }
 
+    .add {
+        background: #429444;
+    }
+
+    .cancel {
+        background:#f44336;
+    }
+
     
 
 

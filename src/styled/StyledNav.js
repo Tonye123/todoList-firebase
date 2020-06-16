@@ -31,6 +31,8 @@ export const StyledNav = styled.nav`
               }
               button {
                 background:none;
+                color: #333;
+                font-weight: 300;
                 border:none;
                 font-size: 16px;
                 padding: 0px;

@@ -66,8 +66,8 @@ export default function Additem() {
              value={input.text} 
              placeholder="type here..."
              onChange={handleChange } />
-             <button onClick={handleAdd} disabled = {input.text.length < 4}>Add</button>
-             <button onClick={() => setShowInput(false)}>Cancel</button>  </>
+             <button className="add" onClick={handleAdd} disabled = {input.text.length < 4}>Add</button>
+             <button className="cancel" onClick={() => setShowInput(false)}>Cancel</button>  </>
                
           }
          

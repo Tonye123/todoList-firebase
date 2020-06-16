@@ -15,7 +15,16 @@ export default createGlobalStyle`
             box-sizing: border-box;
 }
 
-
+    button, .upload, .signin {
+        padding: 8px 12px;
+        background: lightcoral;
+        border: 0;
+        font-weight: bold;
+        font-family: inherit;
+        color: white;
+        cursor: pointer;
+        font-weight: 400;
+    }
 
 
 `

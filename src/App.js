@@ -8,6 +8,7 @@ import SignIn from './components/SignIn';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import SignUp from './components/SignUp';
+import Authentication from './components/Authentication';
 
 
 
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/signup" component={SignUp} /> 
              <PrivateRoute path="/userprofile" component={UserProfile} />
             <PrivateRoute exact path="/" component={HomePage} />
+            <Route path="/authentication" component={Authentication} />
             
            
             

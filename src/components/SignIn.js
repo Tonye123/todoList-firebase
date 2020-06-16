@@ -41,7 +41,7 @@ export default function SignIn() {
         auth.SignIn(input.email,input.password)
         .catch(err => console.error("error signing in", err.message))
 
-        history.push("/");
+        history.push("/authentication")
         
         setInput({
             email: '',
@@ -77,10 +77,10 @@ export default function SignIn() {
                 onChange={handleChange}
             />
 
-            <input type="submit" value="Sign In" />
+            <input className="signin" type="submit" value="Sign In" />
             <button onClick={()=>{
                 signInWithGoogle()
-                history.push("/")
+                history.push("/authentication")
                 }}>Sign In With Google</button>
             <div>
                 <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>

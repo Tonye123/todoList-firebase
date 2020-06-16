@@ -17,6 +17,16 @@ const TodosProvider = ({children}) => {
     })
 
     const [userId, setUid] = useState(null)
+
+    useEffect(() => {
+        let unsubscribeFromAuth = auth.onAuthStateChanged(() => {
+            let ID = auth.currentUser.uid
+            setUid(ID)
+        })
+        return () => {
+            unsubscribeFromAuth();
+        }
+    }, [])
    
     
     useEffect(() => {
@@ -26,12 +36,9 @@ const TodosProvider = ({children}) => {
                
                 
             try {
-                let unsubscribeFromAuth = await auth.onAuthStateChanged(() => {
-                    let ID = auth.currentUser.uid
-                    setUid(ID)
-                })
                 
-                let unsubscribeFromFirestore = await db.collection('newUserData').doc(userId)
+                
+                let unsubscribeFromFirestore = db.collection('newUserData').doc(userId)
                 .collection('lists').onSnapshot(snapShot => {
                     
                     const texts = snapShot.docs.map(doc => { return { id: doc.id, ...doc.data() } });
@@ -41,7 +48,7 @@ const TodosProvider = ({children}) => {
        
                 return () => {
                     unsubscribeFromFirestore();
-                    unsubscribeFromAuth();
+                    
                    
                 
                 }
@@ -54,7 +61,12 @@ const TodosProvider = ({children}) => {
         }
     }
       
-        getData();
+    
+        if(userId) {
+            getData();
+        }   
+       
+    
         
 
        
