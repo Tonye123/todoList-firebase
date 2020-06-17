@@ -10,7 +10,7 @@ export default function Authentication() {
     
     return (
         <div>
-            {!user ? <h2>Loading....</h2> : <HomePage />}
+            {user ? <HomePage /> : <h2>Loading....</h2>}
 
             
 

@@ -89,7 +89,7 @@ export default function SignUp() {
                     onChange={handleChange}
                 />
 
-                <input type="submit" value="Sign Up" />
+                <input className="signup" type="submit" value="Sign Up" />
                 <div>I already have an account <Link to="/signin">Sign In</Link></div>
                
                

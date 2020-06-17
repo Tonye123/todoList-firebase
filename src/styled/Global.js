@@ -15,7 +15,7 @@ export default createGlobalStyle`
             box-sizing: border-box;
 }
 
-    button, .upload, .signin {
+    button, .upload, .signin, .signup {
         padding: 8px 12px;
         background: lightcoral;
         border: 0;
